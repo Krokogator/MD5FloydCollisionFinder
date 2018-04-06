@@ -4,14 +4,16 @@
 public class Animal {
     private byte[] current;
     private byte[] previous;
+    private int trimSize;
 
-    public Animal(byte[] start){
+    public Animal(byte[] start, int trimSize){
         current = start;
+        this.trimSize = trimSize;
     }
 
     public void jumpOne(){
         previous = current;
-        current = MD5.calc(MD5.calc(current));
+        current = MD5.calc(MD5.calc(MD5.trim(current,trimSize)));
     }
 
     public void jumpTwo(){
@@ -19,10 +21,10 @@ public class Animal {
         jumpOne();
     }
     public byte[] getCurrent() {
-        return current;
+        return MD5.trim(current,trimSize);
     }
 
     public byte[] getPrevious() {
-        return previous;
+        return MD5.trim(previous,trimSize);
     }
 }
