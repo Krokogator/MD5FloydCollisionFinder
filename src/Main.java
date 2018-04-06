@@ -3,23 +3,20 @@ import javax.xml.bind.DatatypeConverter;
 public class Main {
 
     public static void main(String[] args) {
-        byte[] out1 = MD5.trim(MD5.calc(MD5.calc("renmich1123376350383621786626")));
-        byte[] out2 = MD5.trim(MD5.calc(MD5.calc("renmich3700873222361195459231")));
+        Floyd floyd = new Floyd();
+        floyd.search("Eszelegeszelekykky".getBytes(), 3);
 
-        boolean same = true;
-        for(int i=0;i<7;i++){
-            if(out1[i]!=out2[i]){
-                same = false;
-                break;
-            }
-        }
-        if(same) { System.out.println("Indentyczne"); }
-        else{ System.out.println("Różne"); }
+        byte[] out1 = floyd.getFirstCollision();
+        byte[] out2 = floyd.getSecondCollision();
 
-        String hex1 = DatatypeConverter.printHexBinary(out1);
-        String hex2 = DatatypeConverter.printHexBinary(out2);
+        //Solution inputs
+        System.out.println("Solution inputs");
+        System.out.println(MD5.binaryToHexString(out1));
+        System.out.println(MD5.binaryToHexString(out2));
 
-        System.out.println(hex1);
-        System.out.println(hex2);
+        //Solution collisions
+        System.out.println("Outputs (collisions)");
+        System.out.println(MD5.binaryToHexString(MD5.calc(MD5.calc(out1))));
+        System.out.println(MD5.binaryToHexString(MD5.calc(MD5.calc(out2))));
     }
 }
