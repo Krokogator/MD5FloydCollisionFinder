@@ -2,7 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
         Floyd floyd = new Floyd();
-        floyd.search("Eszelegeszelekykky".getBytes(), 7);
+        floyd.search("Example0123456789abcdef".getBytes(), 7);
 
         byte[] out1 = floyd.getFirstCollision();
         byte[] out2 = floyd.getSecondCollision();
